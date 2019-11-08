@@ -6,10 +6,11 @@
 #include <vector>
 
 #include "common/array.h"
+#include "common/typedefs.h"
 #include "common/header_section.h"
 #include "sections/section_base.h"
 
-typedef uint32_t EntryID;
+
 
 #pragma pack(push, 1)
 struct BWSTEntry {

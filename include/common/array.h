@@ -11,14 +11,21 @@ class Array
 public:
     explicit Array() = default;
 
-	explicit Array(std::ifstream& stream) {
+	explicit Array(std::ifstream& stream, bool allow_underflow = false) {
         /**
         * Size of one element of array
         * This is used as a basic sanity check to make sure data on disk matches expected sizes.
         */
         uint32_t _sizeof_element = 0;
         stream.read(reinterpret_cast<char *>(&_sizeof_element), sizeof(_sizeof_element));
-        assert(sizeof(T) == _sizeof_element);
+
+        //check size
+        if(allow_underflow) {
+            assert(sizeof(T) >= _sizeof_element);
+        }
+        else {
+            assert(sizeof(T) == _sizeof_element);
+        }
 
         /**
          * The number of elements in the array.
@@ -28,7 +35,7 @@ public:
 
         for (auto index = 0; index < _element_count; index++) {
             T element{};
-            stream.read(reinterpret_cast<char *>(&element), sizeof(element));
+            stream.read(reinterpret_cast<char *>(&element), _sizeof_element);
             _data.push_back(element);
         }
     }

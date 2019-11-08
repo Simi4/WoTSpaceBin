@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(openwg_spacebin
     "include/common/array.h"
+	"include/common/typedefs.h"
 
 	"include/sections/section_bsma.h"
 	"src/sections/section_bsma.cpp"

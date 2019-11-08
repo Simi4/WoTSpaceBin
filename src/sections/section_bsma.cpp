@@ -8,7 +8,7 @@ SectionBSMA::SectionBSMA(std::ifstream &stream, SectionHeader &header) {
     //move to section start
     stream.seekg(header.offset, stream.beg);
 
-    _materials = Array<BSMAMaterialItem>(stream);
+    _materials = Array<BSMAMaterialItem>(stream, true);
     _effects = Array<BSMAEffectItem>(stream);
     _shaderProperties =  Array<BSMAShaderPropertyItem>(stream);
     _shaderPropertiesMatrix = Array<BSMAShaderPropertyMatrixItem>(stream);
