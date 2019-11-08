@@ -14,10 +14,12 @@ SectionBWST::SectionBWST(std::ifstream &stream, SectionHeader &header) {
 
     //read strings to ::_data
     size_t data_start = stream.tellg();
-    for(const auto& element : array){
-        stream.seekg(data_start + element.offset, stream.beg);
+    for (const auto &element : array) {
         std::vector<uint8_t> data;
         data.resize(element.length);
+
+        stream.seekg(data_start + element.offset, stream.beg);
+        stream.read(reinterpret_cast<char *>(data.data()), element.length);
 
         _data.emplace(element.id, data);
     }
@@ -26,4 +28,3 @@ SectionBWST::SectionBWST(std::ifstream &stream, SectionHeader &header) {
 std::vector<uint8_t> SectionBWST::GetString(EntryID id) {
     return _data[id];
 }
-

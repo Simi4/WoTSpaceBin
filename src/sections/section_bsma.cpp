@@ -13,6 +13,8 @@ SectionBSMA::SectionBSMA(std::ifstream &stream, SectionHeader &header) {
     _shaderProperties =  Array<BSMAShaderPropertyItem>(stream);
     _shaderPropertiesMatrix = Array<BSMAShaderPropertyMatrixItem>(stream);
     _shaderPropertiesVectors = Array<BSMAShaderPropertyVectorItem>(stream);
+
+    assert(stream.tellg() == header.offset + header.length);
 }
 
 Array<BSMAMaterialItem>& SectionBSMA::GetMaterials() {

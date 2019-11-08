@@ -7,6 +7,8 @@ SectionBWAL::SectionBWAL(std::ifstream &stream, SectionHeader &header) {
     stream.seekg(header.offset, stream.beg);
 
     _entries = Array<BWALAssetListEntry>(stream);
+
+    assert(stream.tellg() == header.offset + header.length);
 }
 
 Array<BWALAssetListEntry>& SectionBWAL::GetEntries() {

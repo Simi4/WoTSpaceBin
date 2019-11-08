@@ -12,6 +12,13 @@ public:
     explicit Array() = default;
 
 	explicit Array(std::ifstream& stream, bool allow_underflow = false) {
+        deserialize(stream, allow_underflow);
+    }
+
+    void deserialize(std::ifstream& stream, bool allow_underflow = false) {
+
+	    clear();
+
         /**
         * Size of one element of array
         * This is used as a basic sanity check to make sure data on disk matches expected sizes.
@@ -32,6 +39,11 @@ public:
          */
         uint32_t _element_count = 0;
         stream.read(reinterpret_cast<char *>(&_element_count), sizeof(_element_count));
+
+        //skip array if empty
+        if(_element_count == 0 ){
+            return;
+        }
 
         for (auto index = 0; index < _element_count; index++) {
             T element{};
@@ -56,7 +68,12 @@ public:
     iterator end() { return _data.end(); }
     const_iterator end() const { return _data.end(); }
 
+    void clear() {
+        _data.clear();
+    }
+
 private:
+
 
 	/**
 	 * Vector of array elements
