@@ -12,6 +12,9 @@ add_library(openwg_spacebin
 	"include/sections/section_bsma.h"
 	"src/sections/section_bsma.cpp"
 
+	"include/sections/section_bsmo.h"
+	"src/sections/section_bsmo.cpp"
+
 	"include/sections/section_bwal.h"
 	"src/sections/section_bwal.cpp"
 

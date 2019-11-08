@@ -8,6 +8,7 @@
 #include "common/header_section.h"
 
 #include "sections/section_bsma.h"
+#include "sections/section_bsmo.h"
 #include "sections/section_bwal.h"
 #include "sections/section_bwcs.h"
 #include "sections/section_bwst.h"
@@ -54,12 +55,15 @@
  *   * WGSH::V1
  *   * WTbl::V0
  *
+ * OUTDATED SPEC, BUT IMPLEMENTED:
+ *   * BSMO::V1 --> BSMO::V2
+ *
  * OUTDATED SPEC:
  *   * BWLC::V1 --> BWLC::V2
  *   * BWPs::V1 --> BWPs::V2
  *   * BWT2::V1 --> BWT2::V3
  *   * BSMI::V1 --> BSMI::V3
- *   * BSMO::V1 --> BSMO::V2
+ *
  *   * WTAu::V2 --> WTAu::V3
  *   * WTCP::V1 --> WTCP::V2
  *
@@ -78,6 +82,7 @@ class SpaceBin {
     ~SpaceBin();
 
     SectionBSMA GetBSMA();
+	SectionBSMO GetBSMO();
     SectionBWAL GetBWAL();
     SectionBWCS GetBWCS();
     SectionBWST GetBWST();

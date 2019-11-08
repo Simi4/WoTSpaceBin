@@ -9,5 +9,6 @@ int main() {
     s.GetBSMA().GetEffects();
     //BROKEN: s.GetBWWa().GetWaterEntries();
     //BROEKN: s.GetWGSD().GetDecalEntries();
+    s.GetBSMO().GetAnimations();
     return 0;
 }

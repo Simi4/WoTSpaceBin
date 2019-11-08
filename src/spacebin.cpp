@@ -22,6 +22,10 @@ SectionBSMA SpaceBin::GetBSMA() {
     return SectionBSMA(_stream, sectionHeaders["BSMA"]);
 }
 
+SectionBSMO SpaceBin::GetBSMO() {
+    return SectionBSMO(_stream, sectionHeaders["BSMO"]);
+}
+
 SectionBWAL SpaceBin::GetBWAL() {
     return SectionBWAL(_stream, sectionHeaders["BWAL"]);
 }
@@ -41,6 +45,7 @@ SectionBWWa SpaceBin::GetBWWa() {
 SectionWGSD SpaceBin::GetWGSD() {
     return SectionWGSD(_stream, sectionHeaders["WGSD"]);
 }
+
 
 
 
