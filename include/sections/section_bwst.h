@@ -6,17 +6,15 @@
 #include <vector>
 
 #include "common/array.h"
-#include "common/typedefs.h"
 #include "common/header_section.h"
+#include "common/typedefs.h"
 #include "sections/section_base.h"
-
-
 
 #pragma pack(push, 1)
 struct BWSTEntry {
-	EntryID id = 0;
-	uint32_t offset = 0;
-	uint32_t length = 0;
+  EntryID id = 0;
+  uint32_t offset = 0;
+  uint32_t length = 0;
 };
 #pragma pack(pop)
 
@@ -25,8 +23,9 @@ static_assert(sizeof(BWSTEntry) == 12);
 /**
  * BigWorld String Table
  *
- * A string table is provided in order to avoid having duplicated strings through-out the space binary, and also to
- * provide easy support for fixed-size structures that contain string references.
+ * A string table is provided in order to avoid having duplicated strings
+ * through-out the space binary, and also to provide easy support for fixed-size
+ * structures that contain string references.
  *
  * The string table exists as it's own section in the binary format.
  *
@@ -34,13 +33,13 @@ static_assert(sizeof(BWSTEntry) == 12);
  * Any non-ASCII strings should be encoded in UTF-8.
  */
 class SectionBWST : public SectionBase {
-public:
-	explicit SectionBWST(std::ifstream& stream, SectionHeader& header);
+ public:
+  explicit SectionBWST(std::ifstream& stream, SectionHeader& header);
 
-	std::vector<uint8_t> GetString(EntryID id);
+  std::vector<uint8_t> GetString(EntryID id);
 
-private:
-	std::map<EntryID, std::vector<uint8_t>> _data;
+ private:
+  std::map<EntryID, std::vector<uint8_t>> _data;
 
-	static constexpr uint32_t _supported_version = 2;
+  static constexpr uint32_t _supported_version = 2;
 };

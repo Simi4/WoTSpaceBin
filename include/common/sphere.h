@@ -6,13 +6,13 @@
  * A uniform sphere.
  */
 struct Sphere {
-    /**
-     * Origin of the sphere
-     */
-    Vector3 origin;
+  /**
+   * Origin of the sphere
+   */
+  Vector3 origin;
 
-    /**
-     * Radius of the sphere
-     */
-    float radius;
+  /**
+   * Radius of the sphere
+   */
+  float radius;
 };

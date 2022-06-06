@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 
 #include "vector3.h"
 
@@ -8,15 +8,15 @@
  * An axially-aligned bounding-box (AABB).
  */
 struct Bbox {
-    /**
-     * Bounding box mins
-     */
-    Vector3 mins{};
+  /**
+   * Bounding box mins
+   */
+  Vector3 mins{};
 
-    /**
-     * Bounding box max
-     */
-    Vector3 maxs{};
+  /**
+   * Bounding box max
+   */
+  Vector3 maxs{};
 };
 
 #pragma pack(pop)

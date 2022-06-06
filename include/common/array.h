@@ -5,78 +5,70 @@
 #include <fstream>
 #include <vector>
 
-template <typename T> 
-class Array
-{
-public:
-    explicit Array() = default;
+template <typename T>
+class Array {
+ public:
+  explicit Array() = default;
 
-	explicit Array(std::ifstream& stream, bool allow_underflow = false) {
-        deserialize(stream, allow_underflow);
+  explicit Array(std::ifstream& stream, bool allow_underflow = false) {
+    deserialize(stream, allow_underflow);
+  }
+
+  void deserialize(std::ifstream& stream, bool allow_underflow = false) {
+    clear();
+
+    /**
+     * Size of one element of array
+     * This is used as a basic sanity check to make sure data on disk matches
+     * expected sizes.
+     */
+    uint32_t _sizeof_element = 0;
+    stream.read(reinterpret_cast<char*>(&_sizeof_element),
+                sizeof(_sizeof_element));
+
+    // check size
+    if (allow_underflow) {
+      assert(sizeof(T) >= _sizeof_element);
+    } else {
+      assert(sizeof(T) == _sizeof_element);
     }
 
-    void deserialize(std::ifstream& stream, bool allow_underflow = false) {
+    /**
+     * The number of elements in the array.
+     */
+    uint32_t _element_count = 0;
+    stream.read(reinterpret_cast<char*>(&_element_count),
+                sizeof(_element_count));
 
-	    clear();
-
-        /**
-        * Size of one element of array
-        * This is used as a basic sanity check to make sure data on disk matches expected sizes.
-        */
-        uint32_t _sizeof_element = 0;
-        stream.read(reinterpret_cast<char *>(&_sizeof_element), sizeof(_sizeof_element));
-
-        //check size
-        if(allow_underflow) {
-            assert(sizeof(T) >= _sizeof_element);
-        }
-        else {
-            assert(sizeof(T) == _sizeof_element);
-        }
-
-        /**
-         * The number of elements in the array.
-         */
-        uint32_t _element_count = 0;
-        stream.read(reinterpret_cast<char *>(&_element_count), sizeof(_element_count));
-
-        //skip array if empty
-        if(_element_count == 0 ){
-            return;
-        }
-
-        for (auto index = 0; index < _element_count; index++) {
-            T element{};
-            stream.read(reinterpret_cast<char *>(&element), _sizeof_element);
-            _data.push_back(element);
-        }
+    // skip array if empty
+    if (_element_count == 0) {
+      return;
     }
 
-	size_t size() {
-	    return _data.size();
-	}
-
-    T& operator[](size_t i) {
-        return _data[i];
+    for (auto index = 0; index < _element_count; index++) {
+      T element{};
+      stream.read(reinterpret_cast<char*>(&element), _sizeof_element);
+      _data.push_back(element);
     }
+  }
 
-    using iterator = typename std::vector<T>::iterator;
-    using const_iterator = typename std::vector<T>::const_iterator;
+  size_t size() { return _data.size(); }
 
-    iterator begin() { return _data.begin(); }
-    const_iterator begin() const { return _data.begin(); }
-    iterator end() { return _data.end(); }
-    const_iterator end() const { return _data.end(); }
+  T& operator[](size_t i) { return _data[i]; }
 
-    void clear() {
-        _data.clear();
-    }
+  using iterator = typename std::vector<T>::iterator;
+  using const_iterator = typename std::vector<T>::const_iterator;
 
-private:
+  iterator begin() { return _data.begin(); }
+  const_iterator begin() const { return _data.begin(); }
+  iterator end() { return _data.end(); }
+  const_iterator end() const { return _data.end(); }
 
+  void clear() { _data.clear(); }
 
-	/**
-	 * Vector of array elements
-	 */
-    std::vector<T> _data;
+ private:
+  /**
+   * Vector of array elements
+   */
+  std::vector<T> _data;
 };
