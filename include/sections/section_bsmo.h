@@ -14,45 +14,45 @@
 
 struct BSMOModelLoddingItem
 {
-    ListIndex lod_begin = 0;
-    ListIndex lod_end = 0;
+    ListIndex lod_begin;
+    ListIndex lod_end;
 };
 static_assert(sizeof(BSMOModelLoddingItem) == 8);
 
 struct BSMOModelColliderItem
 {
-    Vector3 collision_bounds_min{};
-    Vector3 collision_bounds_max{};
-    EntryID bsp_section_name = 0;
-    ListIndex bsp_material_kind_begin = 0;
-    ListIndex bsp_material_kind_end = 0;
+    Vector3 collision_bounds_min;
+    Vector3 collision_bounds_max;
+    EntryID bsp_section_name;
+    ListIndex bsp_material_kind_begin;
+    ListIndex bsp_material_kind_end;
 };
 static_assert(sizeof(BSMOModelColliderItem) == 36);
 
 struct BSMOBSPMaterialKindItem
 {
-    ListIndex material_index = 0;
-    uint32_t flags = 0; // WorldTriangle::Flags
+    ListIndex material_index;
+    uint32_t flags; // WorldTriangle::Flags
 };
 static_assert(sizeof(BSMOBSPMaterialKindItem) == 8);
 
 struct BSMOModelVisibilityItem
 {
-    Vector3 visibility_bounds_min{};
-    Vector3 visibility_bounds_max{};
+    Vector3 visibility_bounds_min;
+    Vector3 visibility_bounds_max;
 };
 static_assert(sizeof(BSMOModelVisibilityItem) == 24);
 
 struct BSMOLODLoddingItem
 {
-    float max_distance_sq = 0.0f;
+    float max_distance_sq;
 };
 static_assert(sizeof(BSMOLODLoddingItem) == 4);
 
 struct BSMOLODRenderItem
 {
-    ListIndex render_set_begin = 0;
-    ListIndex render_set_end = 0;
+    ListIndex render_set_begin;
+    ListIndex render_set_end;
 };
 static_assert(sizeof(BSMOLODRenderItem) == 8);
 
@@ -64,42 +64,15 @@ enum BSMORenderFlags : uint32_t
 
 struct BSMORenderItem
 {
-    ListIndex node_begin = 0;
-    ListIndex node_end = 0;
-    ListIndex material_index = 0;
-    ListIndex primitive_index = 0;
-    EntryID verts_name = 0;
-    EntryID prims_name = 0;
-    BSMORenderFlags flags = FLAG_NONE;
+    ListIndex node_begin;
+    ListIndex node_end;
+    ListIndex material_index;
+    ListIndex primitive_index;
+    EntryID verts_name;
+    EntryID prims_name;
+    BSMORenderFlags flags;
 };
 static_assert(sizeof(BSMORenderItem) == 28);
-
-struct BSMONodeAffectorItem
-{
-    LocalListIndex local_node_index = 0;
-};
-static_assert(sizeof(BSMONodeAffectorItem) == 4);
-
-struct BSMOAnimationItem
-{
-    EntryID anim_name = 0;
-    float frame_rate = 0.0f;
-    int32_t first_frame = 0;
-    int32_t last_Frame = 0;
-    EntryID cognate = 0;
-    EntryID nodes_name = 0;
-    ListIndex channel_node_begin = 0;
-    ListIndex channel_node_end = 0;
-    EntryID anca_resource_name = 0;
-};
-static_assert(sizeof(BSMOAnimationItem) == 36);
-
-struct BSMONodeItem
-{
-    ListIndex parentIndex = 0;
-    Matrix initialTransform{};
-};
-static_assert(sizeof(BSMONodeItem) == 68);
 
 #pragma pack(pop)
 

@@ -14,6 +14,8 @@ SectionBWST::SectionBWST(std::istream &stream, SectionHeader &header)
     // read array of ::BWSTEntry
     auto array = utils::read_array<BWSTEntry>(stream);
 
+    stream.seekg(4, stream.cur);
+
     // read strings to ::_data
     size_t data_start = stream.tellg();
     for (const auto &element : array)
