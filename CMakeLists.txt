@@ -8,10 +8,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(BUILD_TESTS "Build test programs" OFF)
 
 add_library(${PROJECT_NAME}
+    "src/common/array.cpp"
     "src/sections/section_bsma.cpp"
     "src/sections/section_bsmo.cpp"
     "src/sections/section_bsmi.cpp"
     "src/sections/section_bwst.cpp"
+    "src/sections/section_bwt2.cpp"
     "src/spacebin.cpp"
 )
 

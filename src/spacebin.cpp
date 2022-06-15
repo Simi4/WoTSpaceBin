@@ -40,3 +40,8 @@ SectionBWST SpaceBin::GetBWST()
 {
     return SectionBWST(_stream, sectionHeaders["BWST"]);
 }
+
+SectionBWT2 SpaceBin::GetBWT2()
+{
+    return SectionBWT2(_stream, sectionHeaders["BWT2"]);
+}

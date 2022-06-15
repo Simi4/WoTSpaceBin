@@ -26,6 +26,7 @@ int main()
     s.GetBSMA().GetEffects();
     s.GetBSMO().GetModelsLoddings();
     s.GetBSMI().GetModelIds();
+    s.GetBWT2();
     stream.close();
 
     return 0;

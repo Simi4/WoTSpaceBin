@@ -10,6 +10,7 @@
 #include "sections/section_bsmi.h"
 #include "sections/section_bsmo.h"
 #include "sections/section_bwst.h"
+#include "sections/section_bwt2.h"
 
 /**
  * Compiled Space Binary
@@ -39,6 +40,7 @@ class SpaceBin
     SectionBSMO GetBSMO();
     SectionBSMI GetBSMI();
     SectionBWST GetBWST();
+    SectionBWT2 GetBWT2();
 
   private:
     void readHeaders();

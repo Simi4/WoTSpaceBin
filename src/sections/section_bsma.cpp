@@ -9,11 +9,11 @@ SectionBSMA::SectionBSMA(std::istream &stream, SectionHeader &header)
     // move to section start
     stream.seekg(header.offset, stream.beg);
 
-    _materials = read_array<BSMAMaterialItem>(stream);
-    _effects = read_array<BSMAEffectItem>(stream);
-    _shaderProperties = read_array<BSMAShaderPropertyItem>(stream);
-    _shaderPropertiesMatrix = read_array<BSMAShaderPropertyMatrixItem>(stream);
-    _shaderPropertiesVectors = read_array<BSMAShaderPropertyVectorItem>(stream);
+    _materials = utils::read_array<BSMAMaterialItem>(stream);
+    _effects = utils::read_array<BSMAEffectItem>(stream);
+    _shaderProperties = utils::read_array<BSMAShaderPropertyItem>(stream);
+    _shaderPropertiesMatrix = utils::read_array<BSMAShaderPropertyMatrixItem>(stream);
+    _shaderPropertiesVectors = utils::read_array<BSMAShaderPropertyVectorItem>(stream);
 
     // TODO: textures
 

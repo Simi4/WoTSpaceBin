@@ -12,7 +12,7 @@ SectionBWST::SectionBWST(std::istream &stream, SectionHeader &header)
     stream.seekg(header.offset, stream.beg);
 
     // read array of ::BWSTEntry
-    auto array = read_array<BWSTEntry>(stream);
+    auto array = utils::read_array<BWSTEntry>(stream);
 
     // read strings to ::_data
     size_t data_start = stream.tellg();

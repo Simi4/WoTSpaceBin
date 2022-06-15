@@ -9,29 +9,29 @@ SectionBSMO::SectionBSMO(std::istream &stream, SectionHeader &header)
     // move to section start
     stream.seekg(header.offset, stream.beg);
 
-    _modelsLoddings = read_array<BSMOModelLoddingItem>(stream);
+    _modelsLoddings = utils::read_array<BSMOModelLoddingItem>(stream);
 
-    skip_array(4, stream);
+    utils::skip_array(4, stream);
 
-    _modelsColliders = read_array<BSMOModelColliderItem>(stream);
-    _bspMaterialKinds = read_array<BSMOBSPMaterialKindItem>(stream);
-    _modelsVisibilityBounds = read_array<BSMOModelVisibilityItem>(stream);
+    _modelsColliders = utils::read_array<BSMOModelColliderItem>(stream);
+    _bspMaterialKinds = utils::read_array<BSMOBSPMaterialKindItem>(stream);
+    _modelsVisibilityBounds = utils::read_array<BSMOModelVisibilityItem>(stream);
 
-    skip_array(8, stream);
-    skip_array(4, stream);
+    utils::skip_array(8, stream);
+    utils::skip_array(4, stream);
 
-    _lodLoddings = read_array<BSMOLODLoddingItem>(stream);
-    _lodRenders = read_array<BSMOLODRenderItem>(stream);
-    _renders = read_array<BSMORenderItem>(stream);
+    _lodLoddings = utils::read_array<BSMOLODLoddingItem>(stream);
+    _lodRenders = utils::read_array<BSMOLODRenderItem>(stream);
+    _renders = utils::read_array<BSMORenderItem>(stream);
 
-    skip_array(4, stream);
-    skip_array(72, stream);
-    skip_array(64, stream);
-    skip_array(48, stream);
-    skip_array(40, stream);
-    skip_array(8, stream);
-    skip_array(8, stream);
-    skip_array(8, stream);
+    utils::skip_array(4, stream);
+    utils::skip_array(72, stream);
+    utils::skip_array(64, stream);
+    utils::skip_array(48, stream);
+    utils::skip_array(40, stream);
+    utils::skip_array(8, stream);
+    utils::skip_array(8, stream);
+    utils::skip_array(8, stream);
 
     assert(stream.tellg() == header.offset + header.length);
 }

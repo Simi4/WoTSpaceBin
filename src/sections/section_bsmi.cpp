@@ -9,10 +9,10 @@ SectionBSMI::SectionBSMI(std::istream &stream, SectionHeader &header)
     // move to section start
     stream.seekg(header.offset, stream.beg);
 
-    _transforms = read_array<Matrix>(stream);
-    _chunkModels = read_array<BSMIChunkModel>(stream);
-    _visibilityMasks = read_array<uint32_t>(stream);
-    _modelIds = read_array<BSMIModelId>(stream);
+    _transforms = utils::read_array<Matrix>(stream);
+    _chunkModels = utils::read_array<BSMIChunkModel>(stream);
+    _visibilityMasks = utils::read_array<uint32_t>(stream);
+    _modelIds = utils::read_array<BSMIModelId>(stream);
 
     // TODO
 
