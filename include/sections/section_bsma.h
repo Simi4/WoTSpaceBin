@@ -57,7 +57,7 @@ static_assert(sizeof(BSMAShaderPropertyVectorItem) == 16);
 class SectionBSMA : public SectionBase
 {
   public:
-    explicit SectionBSMA(std::ifstream &stream, SectionHeader &header);
+    explicit SectionBSMA(std::istream &stream, SectionHeader &header);
 
     std::span<BSMAMaterialItem> GetMaterials();
     std::span<BSMAEffectItem> GetEffects();

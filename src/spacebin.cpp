@@ -1,13 +1,12 @@
 #include "spacebin.h"
 
-SpaceBin::SpaceBin(std::ifstream &stream) : _stream(stream)
+SpaceBin::SpaceBin(std::istream &stream) : _stream(stream)
 {
     readHeaders();
 }
 
 SpaceBin::~SpaceBin()
 {
-    _stream.close();
 }
 
 void SpaceBin::readHeaders()
@@ -30,6 +29,11 @@ SectionBSMA SpaceBin::GetBSMA()
 SectionBSMO SpaceBin::GetBSMO()
 {
     return SectionBSMO(_stream, sectionHeaders["BSMO"]);
+}
+
+SectionBSMI SpaceBin::GetBSMI()
+{
+    return SectionBSMI(_stream, sectionHeaders["BSMI"]);
 }
 
 SectionBWST SpaceBin::GetBWST()

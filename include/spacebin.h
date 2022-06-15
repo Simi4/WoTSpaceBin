@@ -7,6 +7,7 @@
 #include "common/header_file.h"
 #include "common/header_section.h"
 #include "sections/section_bsma.h"
+#include "sections/section_bsmi.h"
 #include "sections/section_bsmo.h"
 #include "sections/section_bwst.h"
 
@@ -31,17 +32,18 @@
 class SpaceBin
 {
   public:
-    explicit SpaceBin(std::ifstream &stream);
+    explicit SpaceBin(std::istream &stream);
     ~SpaceBin();
 
     SectionBSMA GetBSMA();
     SectionBSMO GetBSMO();
+    SectionBSMI GetBSMI();
     SectionBWST GetBWST();
 
   private:
     void readHeaders();
 
-    std::ifstream &_stream;
+    std::istream &_stream;
 
     FileHeader fileHeader{};
 

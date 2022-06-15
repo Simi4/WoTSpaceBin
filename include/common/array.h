@@ -6,7 +6,7 @@
 #include <span>
 #include <vector>
 
-static void skip_array(uint32_t size, std::ifstream &stream)
+static void skip_array(uint32_t size, std::istream &stream)
 {
     /**
      * Size of one element of array
@@ -28,7 +28,7 @@ static void skip_array(uint32_t size, std::ifstream &stream)
     stream.seekg(_element_count * _sizeof_element, stream.cur);
 }
 
-template <typename T> static std::vector<T> read_array(std::ifstream &stream)
+template <typename T> static std::vector<T> read_array(std::istream &stream)
 {
     /**
      * Size of one element of array

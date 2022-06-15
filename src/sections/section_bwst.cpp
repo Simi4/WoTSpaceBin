@@ -4,7 +4,7 @@
 
 #include "common/array.h"
 
-SectionBWST::SectionBWST(std::ifstream &stream, SectionHeader &header)
+SectionBWST::SectionBWST(std::istream &stream, SectionHeader &header)
 {
     assert(header.version == _supported_version);
 

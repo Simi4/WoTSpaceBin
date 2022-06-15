@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-SectionBSMO::SectionBSMO(std::ifstream &stream, SectionHeader &header)
+SectionBSMO::SectionBSMO(std::istream &stream, SectionHeader &header)
 {
     assert(header.version == _supported_version);
 

@@ -24,7 +24,7 @@ static_assert(sizeof(BWSTEntry) == 12);
 class SectionBWST : public SectionBase
 {
   public:
-    explicit SectionBWST(std::ifstream &stream, SectionHeader &header);
+    explicit SectionBWST(std::istream &stream, SectionHeader &header);
 
     std::string_view GetString(uint32_t id);
 

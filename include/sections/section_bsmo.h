@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include <fstream>
+#include <istream>
 
 #include "common/array.h"
 #include "common/header_section.h"
@@ -106,7 +106,7 @@ static_assert(sizeof(BSMONodeItem) == 68);
 class SectionBSMO : public SectionBase
 {
   public:
-    explicit SectionBSMO(std::ifstream &stream, SectionHeader &header);
+    explicit SectionBSMO(std::istream &stream, SectionHeader &header);
 
     std::span<BSMOModelLoddingItem> GetModelsLoddings();
     std::span<BSMOModelColliderItem> GetModelsColliders();
