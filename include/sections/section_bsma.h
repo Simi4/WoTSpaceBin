@@ -17,7 +17,7 @@ struct BSMAMaterialItem
     ListIndex effectIndex = 0;
     ListIndex shaderPropertyBegin = 0;
     ListIndex shaderPropertyEnd = 0;
-    uint32_t unknown = 0;
+    EntryID identifier = 0;
 };
 static_assert(sizeof(BSMAMaterialItem) == 16);
 

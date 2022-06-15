@@ -115,13 +115,9 @@ class SectionBSMO : public SectionBase
     std::span<BSMOLODRenderItem> GetLodRenders();
     std::span<BSMOLODLoddingItem> GetLodLoddings();
     std::span<BSMORenderItem> GetRenders();
-    std::span<BSMONodeAffectorItem> GetNodeAffectors1();
-    std::span<BSMOAnimationItem> GetAnimations();
-    std::span<BSMONodeAffectorItem> GetNodeAffectors2();
-    std::span<BSMONodeItem> GetNodes();
 
   private:
-    static constexpr uint32_t _supported_version = 1;
+    static constexpr uint32_t _supported_version = 3;
 
     std::vector<BSMOModelLoddingItem> _modelsLoddings;
     std::vector<BSMOModelColliderItem> _modelsColliders;
@@ -130,8 +126,4 @@ class SectionBSMO : public SectionBase
     std::vector<BSMOLODLoddingItem> _lodLoddings;
     std::vector<BSMOLODRenderItem> _lodRenders;
     std::vector<BSMORenderItem> _renders;
-    std::vector<BSMONodeAffectorItem> _nodeAffectors1;
-    std::vector<BSMOAnimationItem> _animations;
-    std::vector<BSMONodeAffectorItem> _nodeAffectors2;
-    std::vector<BSMONodeItem> _nodes;
 };

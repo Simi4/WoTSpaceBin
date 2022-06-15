@@ -21,6 +21,6 @@ int main()
     SpaceBin s(stream);
     s.GetBWST();
     s.GetBSMA().GetEffects();
-    s.GetBSMO().GetAnimations();
+    s.GetBSMO().GetModelsLoddings();
     return 0;
 }
