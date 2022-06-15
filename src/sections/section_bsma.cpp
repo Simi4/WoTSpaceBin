@@ -1,38 +1,44 @@
-#include <cassert>
-
 #include "sections/section_bsma.h"
 
-SectionBSMA::SectionBSMA(std::ifstream& stream, SectionHeader& header) {
-  assert(header.version == _supported_version);
+#include <cassert>
 
-  // move to section start
-  stream.seekg(header.offset, stream.beg);
+SectionBSMA::SectionBSMA(std::ifstream &stream, SectionHeader &header)
+{
+    assert(header.version == _supported_version);
 
-  _materials = Array<BSMAMaterialItem>(stream, true);
-  _effects = Array<BSMAEffectItem>(stream);
-  _shaderProperties = Array<BSMAShaderPropertyItem>(stream);
-  _shaderPropertiesMatrix = Array<BSMAShaderPropertyMatrixItem>(stream);
-  _shaderPropertiesVectors = Array<BSMAShaderPropertyVectorItem>(stream);
+    // move to section start
+    stream.seekg(header.offset, stream.beg);
 
-  assert(stream.tellg() == header.offset + header.length);
+    _materials = read_array<BSMAMaterialItem>(stream);
+    _effects = read_array<BSMAEffectItem>(stream);
+    _shaderProperties = read_array<BSMAShaderPropertyItem>(stream);
+    _shaderPropertiesMatrix = read_array<BSMAShaderPropertyMatrixItem>(stream);
+    _shaderPropertiesVectors = read_array<BSMAShaderPropertyVectorItem>(stream);
+
+    assert(stream.tellg() == header.offset + header.length);
 }
 
-Array<BSMAMaterialItem>& SectionBSMA::GetMaterials() {
-  return _materials;
+std::span<BSMAMaterialItem> SectionBSMA::GetMaterials()
+{
+    return _materials;
 }
 
-Array<BSMAEffectItem>& SectionBSMA::GetEffects() {
-  return _effects;
+std::span<BSMAEffectItem> SectionBSMA::GetEffects()
+{
+    return _effects;
 }
 
-Array<BSMAShaderPropertyItem>& SectionBSMA::GetShaderProperties() {
-  return _shaderProperties;
+std::span<BSMAShaderPropertyItem> SectionBSMA::GetShaderProperties()
+{
+    return _shaderProperties;
 }
 
-Array<BSMAShaderPropertyMatrixItem>& SectionBSMA::GetShaderPropertiesMatrix() {
-  return _shaderPropertiesMatrix;
+std::span<BSMAShaderPropertyMatrixItem> SectionBSMA::GetShaderPropertiesMatrix()
+{
+    return _shaderPropertiesMatrix;
 }
 
-Array<BSMAShaderPropertyVectorItem>& SectionBSMA::GetShaderPropertiesVectors() {
-  return _shaderPropertiesVectors;
+std::span<BSMAShaderPropertyVectorItem> SectionBSMA::GetShaderPropertiesVectors()
+{
+    return _shaderPropertiesVectors;
 }

@@ -1,3 +1,5 @@
 #pragma once
 
-class SectionBase {};
+class SectionBase
+{
+};

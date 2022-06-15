@@ -3,19 +3,12 @@
 #include <cassert>
 #include <cstdint>
 #include <fstream>
+#include <span>
 #include <vector>
 
-template <typename T>
-class Array {
- public:
-  explicit Array() = default;
-
-  explicit Array(std::ifstream& stream, bool allow_underflow = false) {
-    deserialize(stream, allow_underflow);
-  }
-
-  void deserialize(std::ifstream& stream, bool allow_underflow = false) {
-    clear();
+template <typename T> std::vector<T> read_array(std::ifstream &stream)
+{
+    std::vector<T> result;
 
     /**
      * Size of one element of array
@@ -23,52 +16,24 @@ class Array {
      * expected sizes.
      */
     uint32_t _sizeof_element = 0;
-    stream.read(reinterpret_cast<char*>(&_sizeof_element),
-                sizeof(_sizeof_element));
+    stream.read(reinterpret_cast<char *>(&_sizeof_element), sizeof(_sizeof_element));
 
     // check size
-    if (allow_underflow) {
-      assert(sizeof(T) >= _sizeof_element);
-    } else {
-      assert(sizeof(T) == _sizeof_element);
-    }
+    assert(sizeof(T) == _sizeof_element);
 
     /**
      * The number of elements in the array.
      */
     uint32_t _element_count = 0;
-    stream.read(reinterpret_cast<char*>(&_element_count),
-                sizeof(_element_count));
+    stream.read(reinterpret_cast<char *>(&_element_count), sizeof(_element_count));
 
     // skip array if empty
-    if (_element_count == 0) {
-      return;
+    if (_element_count == 0)
+    {
+        return result;
     }
 
-    for (auto index = 0; index < _element_count; index++) {
-      T element{};
-      stream.read(reinterpret_cast<char*>(&element), _sizeof_element);
-      _data.push_back(element);
-    }
-  }
-
-  size_t size() { return _data.size(); }
-
-  T& operator[](size_t i) { return _data[i]; }
-
-  using iterator = typename std::vector<T>::iterator;
-  using const_iterator = typename std::vector<T>::const_iterator;
-
-  iterator begin() { return _data.begin(); }
-  const_iterator begin() const { return _data.begin(); }
-  iterator end() { return _data.end(); }
-  const_iterator end() const { return _data.end(); }
-
-  void clear() { _data.clear(); }
-
- private:
-  /**
-   * Vector of array elements
-   */
-  std::vector<T> _data;
-};
+    result.resize(_element_count);
+    stream.read(reinterpret_cast<char *>(result.data()), _sizeof_element);
+    return result;
+}

@@ -1,76 +1,88 @@
-#include <cassert>
-
 #include "sections/section_bsmo.h"
 
-SectionBSMO::SectionBSMO(std::ifstream& stream, SectionHeader& header) {
-  assert(header.version == _supported_version);
+#include <cassert>
 
-  // move to section start
-  stream.seekg(header.offset, stream.beg);
+SectionBSMO::SectionBSMO(std::ifstream &stream, SectionHeader &header)
+{
+    assert(header.version == _supported_version);
 
-  _modelsLoddings = Array<BSMOModelLoddingItem>(stream);
-  _modelsColliders = Array<BSMOModelColliderItem>(stream);
-  _bspMaterialKinds = Array<BSMOBSPMaterialKindItem>(stream);
-  _modelsVisibilityBounds = Array<BSMOModelVisibilityItem>(stream);
+    // move to section start
+    stream.seekg(header.offset, stream.beg);
 
-  // something messed up starting this line
+    _modelsLoddings = read_array<BSMOModelLoddingItem>(stream);
+    _modelsColliders = read_array<BSMOModelColliderItem>(stream);
+    _bspMaterialKinds = read_array<BSMOBSPMaterialKindItem>(stream);
+    _modelsVisibilityBounds = read_array<BSMOModelVisibilityItem>(stream);
 
-  Array<BSMOLODRenderItem> temp1(
-      stream);  //??? just to skip array of 8 bytes elements
+    // something messed up starting this line
 
-  _lodLoddings = Array<BSMOLODLoddingItem>(stream);
+    //??? just to skip array of 8 bytes elements
+    read_array<BSMOLODRenderItem>(stream);
 
-  Array<BSMOLODLoddingItem> temp2(
-      stream);  //??? just to skip array of 4 bytes elements
+    _lodLoddings = read_array<BSMOLODLoddingItem>(stream);
 
-  _lodRenders = Array<BSMOLODRenderItem>(stream);
-  _renders = Array<BSMORenderItem>(stream);
-  _nodeAffectors1 = Array<BSMONodeAffectorItem>(stream);
-  _animations = Array<BSMOAnimationItem>(stream);
-  _nodeAffectors2 = Array<BSMONodeAffectorItem>(stream);
-  _nodes = Array<BSMONodeItem>(stream);
+    //??? just to skip array of 4 bytes elements
+    read_array<BSMOLODLoddingItem>(stream);
+
+    _lodRenders = read_array<BSMOLODRenderItem>(stream);
+    _renders = read_array<BSMORenderItem>(stream);
+    _nodeAffectors1 = read_array<BSMONodeAffectorItem>(stream);
+    _animations = read_array<BSMOAnimationItem>(stream);
+    _nodeAffectors2 = read_array<BSMONodeAffectorItem>(stream);
+    _nodes = read_array<BSMONodeItem>(stream);
 }
 
-Array<BSMOModelLoddingItem>& SectionBSMO::GetModelsLoddings() {
-  return _modelsLoddings;
+std::span<BSMOModelLoddingItem> SectionBSMO::GetModelsLoddings()
+{
+    return _modelsLoddings;
 }
 
-Array<BSMOModelColliderItem>& SectionBSMO::GetModelsColliders() {
-  return _modelsColliders;
+std::span<BSMOModelColliderItem> SectionBSMO::GetModelsColliders()
+{
+    return _modelsColliders;
 }
 
-Array<BSMOBSPMaterialKindItem>& SectionBSMO::GetBspMaterialKinds() {
-  return _bspMaterialKinds;
+std::span<BSMOBSPMaterialKindItem> SectionBSMO::GetBspMaterialKinds()
+{
+    return _bspMaterialKinds;
 }
 
-Array<BSMOModelVisibilityItem>& SectionBSMO::GetModelsVisibilityBounds() {
-  return _modelsVisibilityBounds;
+std::span<BSMOModelVisibilityItem> SectionBSMO::GetModelsVisibilityBounds()
+{
+    return _modelsVisibilityBounds;
 }
 
-Array<BSMOLODLoddingItem>& SectionBSMO::GetLodLoddings() {
-  return _lodLoddings;
+std::span<BSMOLODLoddingItem> SectionBSMO::GetLodLoddings()
+{
+    return _lodLoddings;
 }
 
-Array<BSMOLODRenderItem>& SectionBSMO::GetLodRenders() {
-  return _lodRenders;
+std::span<BSMOLODRenderItem> SectionBSMO::GetLodRenders()
+{
+    return _lodRenders;
 }
 
-Array<BSMORenderItem>& SectionBSMO::GetRenders() {
-  return _renders;
+std::span<BSMORenderItem> SectionBSMO::GetRenders()
+{
+    return _renders;
 }
 
-Array<BSMONodeAffectorItem>& SectionBSMO::GetNodeAffectors1() {
-  return _nodeAffectors1;
+std::span<BSMONodeAffectorItem> SectionBSMO::GetNodeAffectors1()
+{
+    return _nodeAffectors1;
 }
 
-Array<BSMOAnimationItem>& SectionBSMO::GetAnimations() {
-  return _animations;
+std::span<BSMOAnimationItem> SectionBSMO::GetAnimations()
+{
+    return _animations;
 }
 
-Array<BSMONodeAffectorItem>& SectionBSMO::GetNodeAffectors2() {
-  return _nodeAffectors2;
+std::span<BSMONodeAffectorItem> SectionBSMO::GetNodeAffectors2()
+{
+    return _nodeAffectors2;
 }
 
-Array<BSMONodeItem>& SectionBSMO::GetNodes() {
-  return _nodes;
+std::span<BSMONodeItem> SectionBSMO::GetNodes()
+{
+    return _nodes;
 }

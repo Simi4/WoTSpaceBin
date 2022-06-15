@@ -7,16 +7,17 @@
 /**
  * An axially-aligned bounding-box (AABB).
  */
-struct Bbox {
-  /**
-   * Bounding box mins
-   */
-  Vector3 mins{};
+struct Bbox
+{
+    /**
+     * Bounding box mins
+     */
+    Vector3 mins{};
 
-  /**
-   * Bounding box max
-   */
-  Vector3 maxs{};
+    /**
+     * Bounding box max
+     */
+    Vector3 maxs{};
 };
 
 #pragma pack(pop)

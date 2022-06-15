@@ -8,13 +8,17 @@
  * formats
  */
 #pragma pack(push, 1)
-struct FourCC {
-  union {
-    uint32_t value = 0;
-    char fourcc[4];
-  };
+struct FourCC
+{
+    union {
+        uint32_t value = 0;
+        char fourcc[4];
+    };
 
-  std::string ToString() { return std::string(fourcc, sizeof(fourcc)); }
+    std::string ToString()
+    {
+        return std::string(fourcc, sizeof(fourcc));
+    }
 };
 #pragma pack(pop)
 
