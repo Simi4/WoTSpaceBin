@@ -5,6 +5,8 @@ project(openwg_spacebin)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+option(BUILD_TESTS "Build test programs" OFF)
+
 add_library(${PROJECT_NAME}
     "src/sections/section_bsma.cpp"
     "src/sections/section_bsmo.cpp"
@@ -15,7 +17,9 @@ add_library(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PUBLIC "include")
 
-add_executable(openwg_spacebin_test
-    "tests/main.cpp"
-)
-target_link_libraries(openwg_spacebin_test ${PROJECT_NAME})
+if(BUILD_TESTS)
+    add_executable(openwg_spacebin_test
+        "tests/main.cpp"
+    )
+    target_link_libraries(openwg_spacebin_test ${PROJECT_NAME})
+endif(BUILD_TESTS)
